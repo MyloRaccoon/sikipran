@@ -4,9 +4,16 @@ import java.util.ArrayList;
 
 public class Row extends Deck {
 
-    public Row(Card first_card) {
+    private String name;
+
+    public Row(String name, Card first_card) {
         super(new ArrayList<Card>());
         cards.add(first_card);
+        this.name = name;
+    }
+
+    public String name() {
+        return name;
     }
 
     public int put(Card card, boolean taking) {

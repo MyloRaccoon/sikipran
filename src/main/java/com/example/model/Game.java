@@ -33,10 +33,10 @@ public class Game {
             players.add(new Player(playerName, hand));
         }
 
-        row1 = new Row(deck.draw());
-        row2 = new Row(deck.draw());
-        row3 = new Row(deck.draw());
-        row4 = new Row(deck.draw());
+        row1 = new Row("1", deck.draw());
+        row2 = new Row("2", deck.draw());
+        row3 = new Row("3", deck.draw());
+        row4 = new Row("4", deck.draw());
 
         rows = new ArrayList<Row>(Arrays.asList(row1, row2, row3, row4));
     }
@@ -60,6 +60,7 @@ public class Game {
                 int indexCard = player.getIndexOf(card);
                 Row row = getRowFromCardIFuckingHateNamingThings(card);
                 boolean taking = false;
+                System.out.println(player.name() + " place " + card + " sur la ligne " + row.name());
                 if (row.getLastCard().number() == -1) {
                     row = askForRow();
                     taking = true;
@@ -67,6 +68,8 @@ public class Game {
 
                 player.play(row, indexCard, taking);
             }
+            playerCards.clear();
+            cardsToOrder.clear();
         }
         System.out.println("~~~~~~~~~~~~~");
         System.out.println("Resultats : ");
@@ -104,7 +107,7 @@ public class Game {
         } while (i < 3 && lastCard.number() > card.number());
 
         if (lastCard.number() > card.number())
-            rowToPut = new Row(new Card(-1));
+            rowToPut = new Row("default", new Card(-1));
         else
             rowToPut = cardsNrows.get(lastCard);
 
